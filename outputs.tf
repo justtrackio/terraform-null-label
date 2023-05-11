@@ -100,3 +100,17 @@ output "context" {
 EOT
 }
 
+output "aws_account_id" {
+  value       = local.enabled ? local.aws_account_id : ""
+  description = "The AWS account id"
+}
+
+output "aws_region" {
+  value       = local.enabled ? local.aws_region : ""
+  description = "The AWS region"
+}
+
+output "organizational_unit" {
+  value       = local.enabled ? local.organizational_unit : ""
+  description = "The organizational unit"
+}

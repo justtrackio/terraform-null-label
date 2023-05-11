@@ -66,6 +66,10 @@ locals {
 
     descriptor_formats = merge(lookup(var.context, "descriptor_formats", {}), var.descriptor_formats)
     labels_as_tags     = local.context_labels_as_tags_is_unset ? var.labels_as_tags : var.context.labels_as_tags
+
+    aws_account_id      = var.aws_account_id == null ? var.context.aws_account_id : var.aws_account_id
+    aws_region          = var.aws_region == null ? var.context.aws_region : var.aws_region
+    organizational_unit = var.organizational_unit == null ? var.context.organizational_unit : var.organizational_unit
   }
 
 
@@ -106,7 +110,10 @@ locals {
   labels_as_tags = contains(local.input.labels_as_tags, "default") ? local.default_labels_as_tags : local.input.labels_as_tags
 
   # Just for standardization and completeness
-  descriptor_formats = local.input.descriptor_formats
+  descriptor_formats  = local.input.descriptor_formats
+  aws_account_id      = local.input.aws_account_id
+  aws_region          = local.input.aws_region
+  organizational_unit = local.input.organizational_unit
 
   additional_tag_map = merge(var.context.additional_tag_map, var.additional_tag_map)
 
@@ -185,6 +192,9 @@ locals {
     label_value_case    = local.label_value_case
     labels_as_tags      = local.labels_as_tags
     descriptor_formats  = local.descriptor_formats
+    aws_account_id      = local.aws_account_id
+    aws_region          = local.aws_region
+    organizational_unit = local.organizational_unit
   }
 
 }

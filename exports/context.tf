@@ -1,14 +1,14 @@
 #
-# ONLY EDIT THIS FILE IN github.com/cloudposse/terraform-null-label
+# ONLY EDIT THIS FILE IN github.com/justtrackio/terraform-null-label
 # All other instances of this file should be a copy of that one
 #
 #
-# Copy this file from https://github.com/cloudposse/terraform-null-label/blob/master/exports/context.tf
+# Copy this file from https://github.com/justtrackio/terraform-null-label/blob/main/exports/context.tf
 # and then place it in your Terraform module to automatically get
-# Cloud Posse's standard configuration inputs suitable for passing
-# to Cloud Posse modules.
+# justtrack's standard configuration inputs suitable for passing
+# to justtrack modules.
 #
-# curl -sL https://raw.githubusercontent.com/cloudposse/terraform-null-label/master/exports/context.tf -o context.tf
+# curl -sL https://raw.githubusercontent.com/justtrackio/terraform-null-label/main/exports/context.tf -o context.tf
 #
 # Modules should access the whole context as `module.this.context`
 # to get the input variables with nulls for defaults,
@@ -21,8 +21,8 @@
 #
 
 module "this" {
-  source  = "cloudposse/label/null"
-  version = "0.25.0" # requires Terraform >= 0.13.0
+  source  = "justtrackio/label/null"
+  version = "0.26.0" # requires Terraform >= 0.13.0
 
   enabled             = var.enabled
   namespace           = var.namespace
@@ -41,13 +41,16 @@ module "this" {
   label_value_case    = var.label_value_case
   descriptor_formats  = var.descriptor_formats
   labels_as_tags      = var.labels_as_tags
+  aws_account_id      = var.aws_account_id
+  aws_region          = var.aws_region
+  organizational_unit = var.organizational_unit
 
   context = var.context
 }
 
-# Copy contents of cloudposse/terraform-null-label/variables.tf here
+# Copy contents of justtrackio/terraform-null-label/variables.tf here
 
-variable "context" {
+variable "context" { # tflint-ignore: terraform_standard_module_structure
   type = any
   default = {
     enabled             = true
@@ -94,37 +97,37 @@ variable "context" {
   }
 }
 
-variable "enabled" {
+variable "enabled" { # tflint-ignore: terraform_standard_module_structure
   type        = bool
   default     = null
   description = "Set to false to prevent the module from creating any resources"
 }
 
-variable "namespace" {
+variable "namespace" { # tflint-ignore: terraform_standard_module_structure
   type        = string
   default     = null
   description = "ID element. Usually an abbreviation of your organization name, e.g. 'eg' or 'cp', to help ensure generated IDs are globally unique"
 }
 
-variable "tenant" {
+variable "tenant" { # tflint-ignore: terraform_standard_module_structure
   type        = string
   default     = null
   description = "ID element _(Rarely used, not included by default)_. A customer identifier, indicating who this instance of a resource is for"
 }
 
-variable "environment" {
+variable "environment" { # tflint-ignore: terraform_standard_module_structure
   type        = string
   default     = null
   description = "ID element. Usually used for region e.g. 'uw2', 'us-west-2', OR role 'prod', 'staging', 'dev', 'UAT'"
 }
 
-variable "stage" {
+variable "stage" { # tflint-ignore: terraform_standard_module_structure
   type        = string
   default     = null
   description = "ID element. Usually used to indicate role, e.g. 'prod', 'staging', 'source', 'build', 'test', 'deploy', 'release'"
 }
 
-variable "name" {
+variable "name" { # tflint-ignore: terraform_standard_module_structure
   type        = string
   default     = null
   description = <<-EOT
@@ -134,7 +137,7 @@ variable "name" {
     EOT
 }
 
-variable "delimiter" {
+variable "delimiter" { # tflint-ignore: terraform_standard_module_structure
   type        = string
   default     = null
   description = <<-EOT
@@ -143,7 +146,7 @@ variable "delimiter" {
   EOT
 }
 
-variable "attributes" {
+variable "attributes" { # tflint-ignore: terraform_standard_module_structure
   type        = list(string)
   default     = []
   description = <<-EOT
@@ -154,7 +157,7 @@ variable "attributes" {
     EOT
 }
 
-variable "labels_as_tags" {
+variable "labels_as_tags" { # tflint-ignore: terraform_standard_module_structure
   type        = set(string)
   default     = ["default"]
   description = <<-EOT
@@ -169,7 +172,7 @@ variable "labels_as_tags" {
     EOT
 }
 
-variable "tags" {
+variable "tags" { # tflint-ignore: terraform_standard_module_structure
   type        = map(string)
   default     = {}
   description = <<-EOT
@@ -178,7 +181,7 @@ variable "tags" {
     EOT
 }
 
-variable "additional_tag_map" {
+variable "additional_tag_map" { # tflint-ignore: terraform_standard_module_structure
   type        = map(string)
   default     = {}
   description = <<-EOT
@@ -188,7 +191,7 @@ variable "additional_tag_map" {
     EOT
 }
 
-variable "label_order" {
+variable "label_order" { # tflint-ignore: terraform_standard_module_structure
   type        = list(string)
   default     = null
   description = <<-EOT
@@ -198,7 +201,7 @@ variable "label_order" {
     EOT
 }
 
-variable "regex_replace_chars" {
+variable "regex_replace_chars" { # tflint-ignore: terraform_standard_module_structure
   type        = string
   default     = null
   description = <<-EOT
@@ -208,7 +211,7 @@ variable "regex_replace_chars" {
   EOT
 }
 
-variable "id_length_limit" {
+variable "id_length_limit" { # tflint-ignore: terraform_standard_module_structure
   type        = number
   default     = null
   description = <<-EOT
@@ -223,7 +226,7 @@ variable "id_length_limit" {
   }
 }
 
-variable "label_key_case" {
+variable "label_key_case" { # tflint-ignore: terraform_standard_module_structure
   type        = string
   default     = null
   description = <<-EOT
@@ -239,7 +242,7 @@ variable "label_key_case" {
   }
 }
 
-variable "label_value_case" {
+variable "label_value_case" { # tflint-ignore: terraform_standard_module_structure
   type        = string
   default     = null
   description = <<-EOT
@@ -257,7 +260,7 @@ variable "label_value_case" {
   }
 }
 
-variable "descriptor_formats" {
+variable "descriptor_formats" { # tflint-ignore: terraform_standard_module_structure
   type        = any
   default     = {}
   description = <<-EOT
@@ -276,4 +279,22 @@ variable "descriptor_formats" {
     EOT
 }
 
-#### End of copy of cloudposse/terraform-null-label/variables.tf
+variable "aws_account_id" { # tflint-ignore: terraform_standard_module_structure
+  type        = string
+  description = "AWS account id"
+  default     = null
+}
+
+variable "aws_region" { # tflint-ignore: terraform_standard_module_structure
+  type        = string
+  description = "AWS region"
+  default     = null
+}
+
+variable "organizational_unit" { # tflint-ignore: terraform_standard_module_structure
+  type        = string
+  description = "Usually used to indicate the AWS organizational unit, e.g. 'prod', 'sdlc'"
+  default     = null
+}
+
+#### End of copy of justtrackio/terraform-null-label/variables.tf
