@@ -25,6 +25,10 @@ variable "context" {
     # by setting `labels_as_tags` to `[]`, so we need
     # a different sentinel to indicate "default"
     labels_as_tags = ["unset"]
+
+    aws_account_id      = null
+    aws_region          = null
+    organizational_unit = null
   }
   description = <<-EOT
     Single object for setting entire context at once.
@@ -225,4 +229,22 @@ variable "descriptor_formats" {
     identical to how they appear in `id`.
     Default is `{}` (`descriptors` output will be empty).
     EOT
+}
+
+variable "aws_account_id" {
+  type        = string
+  description = "AWS account id"
+  default     = null
+}
+
+variable "aws_region" {
+  type        = string
+  description = "AWS region"
+  default     = null
+}
+
+variable "organizational_unit" {
+  type        = string
+  description = "Usually used to indicate the AWS organizational unit, e.g. 'prod', 'sdlc'"
+  default     = null
 }
